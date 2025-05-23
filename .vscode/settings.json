@@ -1,3 +1,4 @@
 {
-    "accessibility.voice.speechLanguage": "zh-CN"
+    "accessibility.voice.speechLanguage": "zh-CN",
+    "accessibility.voice.speechTimeout": 5000
 }
