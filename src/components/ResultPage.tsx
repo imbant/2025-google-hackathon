@@ -63,7 +63,7 @@ const ResultPage: React.FC = () => {
               {columns[colIdx].map((item, idx) => (
                 <Card
                   key={item.presentName + idx}
-                  title={<span style={{ fontWeight: idx === 0 ? 700 : 500 }}>{idx === 0 ? `🏆 ${item.presentName}` : item.presentName}</span>}
+                  title={<span style={{ fontWeight: idx === 0 ? 700 : 500 }}>{item.presentName}</span>}
                   style={{
                     boxShadow: '0 4px 16px rgba(202,85,93,0.10)',
                     cursor: 'pointer',
