@@ -141,14 +141,17 @@ const OptionSelector: React.FC<{
             <Radio key={opt.value} value={opt.value}>{opt.label}</Radio>
           ))}
         </Radio.Group>
-        {isOtherEffectivelySelected && (
-          <Input
-            style={{ marginTop: 8, width: 240 }}
-            placeholder="请输入其他内容"
-            value={otherInputText}
-            onChange={handleOtherInputChange}
-          />
-        )}
+        <Input
+          style={{
+            marginTop: 8,
+            width: 240,
+            visibility: isOtherEffectivelySelected ? 'visible' : 'hidden',
+          }}
+          placeholder="请输入其他内容"
+          value={otherInputText}
+          onChange={handleOtherInputChange}
+          disabled={!isOtherEffectivelySelected}
+        />
       </>
     );
   } else {
@@ -163,14 +166,17 @@ const OptionSelector: React.FC<{
             <Checkbox key={opt.value} value={opt.value}>{opt.label}</Checkbox>
           ))}
         </Checkbox.Group>
-        {isOtherEffectivelySelected && (
-          <Input
-            style={{ marginTop: 8, width: 240 }}
-            placeholder="请输入其他内容"
-            value={otherInputText}
-            onChange={handleOtherInputChange}
-          />
-        )}
+        <Input
+          style={{
+            marginTop: 8,
+            width: 240,
+            visibility: isOtherEffectivelySelected ? 'visible' : 'hidden',
+          }}
+          placeholder="请输入其他内容"
+          value={otherInputText}
+          onChange={handleOtherInputChange}
+          disabled={!isOtherEffectivelySelected}
+        />
       </>
     );
   }

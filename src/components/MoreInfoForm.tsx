@@ -6,8 +6,12 @@ import type { PresentRecommend } from "./MyForm";
 const { TextArea } = Input;
 
 // 公共AI请求函数
-async function getPresentRecommend(prompt: string): Promise<PresentRecommend[]> {
-  const ai = new GoogleGenAI({ apiKey: "AIzaSyAEEAD6E5-32nCpFeF2RiPHcXef7n2p1CI" });
+async function getPresentRecommend(
+  prompt: string
+): Promise<PresentRecommend[]> {
+  const ai = new GoogleGenAI({
+    apiKey: "AIzaSyAEEAD6E5-32nCpFeF2RiPHcXef7n2p1CI",
+  });
   const response = await ai.models.generateContent({
     model: "gemini-2.0-flash",
     contents: prompt,
@@ -19,11 +23,11 @@ async function getPresentRecommend(prompt: string): Promise<PresentRecommend[]> 
           type: Type.OBJECT,
           properties: {
             presentName: { type: Type.STRING },
-            presentReason: { type: Type.STRING }
-          }
-        }
-      }
-    }
+            presentReason: { type: Type.STRING },
+          },
+        },
+      },
+    },
   });
   let result: PresentRecommend[] = [];
   try {
@@ -39,13 +43,21 @@ const MoreInfoForm: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   // 读取历史推荐和用户答题
-  const [history, setHistory] = useState<{ answers: Record<number, string[]>; questions: any[]; lastResult: PresentRecommend[] }>({ answers: {}, questions: [], lastResult: [] });
+  const [history, setHistory] = useState<{
+    answers: Record<number, string[]>;
+    questions: any[];
+    lastResult: PresentRecommend[];
+  }>({ answers: {}, questions: [], lastResult: [] });
 
   React.useEffect(() => {
     // 从 window.history.state 读取
     const state = window.history.state && window.history.state.usr;
     if (state && state.answers && state.questions && state.results) {
-      setHistory({ answers: state.answers, questions: state.questions, lastResult: state.results });
+      setHistory({
+        answers: state.answers,
+        questions: state.questions,
+        lastResult: state.results,
+      });
     }
   }, []);
 
@@ -53,9 +65,10 @@ const MoreInfoForm: React.FC = () => {
     setLoading(true);
     try {
       // 构造新 prompt
-      let prompt = '请根据以下用户信息和补充信息，重新推荐5个更精准的礼物，并简要说明推荐理由：\n';
+      let prompt =
+        "请根据以下用户信息和补充信息，重新推荐5个更精准的礼物，并简要说明推荐理由：\n";
       history.questions.forEach((q: any, idx: number) => {
-        const userAnswer = history.answers[idx]?.join('，') || '未选择';
+        const userAnswer = history.answers[idx]?.join("，") || "未选择";
         prompt += `${q.question} ${userAnswer}\n`;
       });
       prompt += `\n上一次AI推荐如下：\n`;
@@ -67,7 +80,17 @@ const MoreInfoForm: React.FC = () => {
 
       const result = await getPresentRecommend(prompt);
       // 跳转到结果页并传递新数据
-      window.history.pushState({ usr: { answers: history.answers, questions: history.questions, results: result } }, "", "/result");
+      window.history.pushState(
+        {
+          usr: {
+            answers: history.answers,
+            questions: history.questions,
+            results: result,
+          },
+        },
+        "",
+        "/result"
+      );
       window.location.href = "/result";
     } finally {
       setLoading(false);
@@ -77,23 +100,28 @@ const MoreInfoForm: React.FC = () => {
   return (
     <Layout style={{ minHeight: "100vh", padding: 24 }}>
       <Card style={{ maxWidth: 600, margin: "40px auto" }}>
-        <h2>补充更多信息</h2>
-        <p>请在下方输入您想补充的详细信息，以帮助我们为您提供更准确的推荐：</p>
+        <h2>😉关于TA</h2>
+        <p>建议语言简明，重点突出，您补充的内容也可以建立人物信息档案哦~</p>
         <TextArea
           rows={6}
           value={info}
-          onChange={e => setInfo(e.target.value)}
-          placeholder="请输入补充信息..."
+          onChange={(e) => setInfo(e.target.value)}
+          placeholder="请输入更多收礼人信息，如：TA是素食主义者，关注环保。"
         />
         <div style={{ marginTop: 24 }}>
+          <Button>回到礼物结果页</Button>
           <Button
             type="primary"
             loading={loading}
             onClick={handleSubmit}
             disabled={!info.trim()}
           >
-            提交
+            开始推荐
           </Button>
+          <Button>开始推荐并保存TA的档案</Button>
+        </div>
+        <div>
+          您输入的内容，我们会发送给大模型参考，但对您的个人信息我们将遵《隐私协议》。
         </div>
       </Card>
     </Layout>
