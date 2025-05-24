@@ -37,18 +37,6 @@ const ResultPage: React.FC = () => {
     '#E3E9FF', // 淡蓝紫
     '#F6FFE3'  // 淡黄绿
   ];
-  const macaronImgs = [
-    '/src/assets/hero.svg',
-    '/src/assets/object-one.svg',
-    '/src/assets/object-two.svg',
-    '/src/assets/object-three.svg',
-    '/src/assets/start.svg',
-    '/src/assets/cta.svg',
-    '/src/assets/hiw.svg',
-    '/src/assets/logo-dark.svg',
-    '/src/assets/image.png',
-    '/src/assets/WechatIMG25.png'
-  ];
 
   return (
     <div style={{ minHeight: "100vh", padding: 24, background: "#f7f8fa" }}>
@@ -91,20 +79,6 @@ const ResultPage: React.FC = () => {
                   onClick={() => handleCardClick(item)}
                   hoverable
                 >
-                  <img
-                    src={macaronImgs[(colIdx * 3 + idx) % macaronImgs.length]}
-                    alt="icon"
-                    style={{
-                      width: 48,
-                      height: 48,
-                      position: 'absolute',
-                      top: 12,
-                      right: 16,
-                      opacity: 0.18,
-                      pointerEvents: 'none',
-                      zIndex: 0
-                    }}
-                  />
                   <div style={{ color: '#CA555D', fontSize: 16, fontWeight: 500, zIndex: 1, position: 'relative', marginBottom: 8 }}>{item.presentReason}</div>
                   <div style={{ color: '#888', fontSize: 14, marginBottom: 4 }}>
                     <b>标签：</b>{item.tags && item.tags.length > 0 ? item.tags.join(' / ') : '无'}

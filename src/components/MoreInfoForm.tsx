@@ -3,6 +3,8 @@ import { Card, Input, Button, Layout, message } from "antd";
 import { GoogleGenAI, Type } from "@google/genai";
 import type { PresentRecommend } from "./MyForm";
 import { getApiKey } from "../utils/getApiKey";
+import { getPresentRecommendSchema } from "../utils/getPresentRecommendSchema";
+import { getPresentRecommendModel } from "../utils/getPresentRecommendModel";
 
 const { TextArea } = Input;
 
@@ -14,20 +16,11 @@ async function getPresentRecommend(
     apiKey: getApiKey(),
   });
   const response = await ai.models.generateContent({
-    model: "gemini-2.0-flash",
+    model: getPresentRecommendModel(),
     contents: prompt,
     config: {
       responseMimeType: "application/json",
-      responseSchema: {
-        type: Type.ARRAY,
-        items: {
-          type: Type.OBJECT,
-          properties: {
-            presentName: { type: Type.STRING },
-            presentReason: { type: Type.STRING },
-          },
-        },
-      },
+      responseSchema: getPresentRecommendSchema(),
     },
   });
   let result: PresentRecommend[] = [];
@@ -67,7 +60,7 @@ const MoreInfoForm: React.FC = () => {
     try {
       // 构造新 prompt
       let prompt =
-        "请根据以下用户信息和补充信息，重新推荐5个更精准的礼物，并简要说明推荐理由：\n";
+        "请根据以下用户信息和补充信息，重新推荐10个更精准的礼物，并简要说明推荐理由：\n";
       history.questions.forEach((q: any, idx: number) => {
         const userAnswer = history.answers[idx]?.join("，") || "未选择";
         prompt += `${q.question} ${userAnswer}\n`;
@@ -77,7 +70,7 @@ const MoreInfoForm: React.FC = () => {
         prompt += `${idx + 1}. ${item.presentName}：${item.presentReason}\n`;
       });
       prompt += `\n用户补充信息：${info}\n`;
-      prompt += `\n请基于所有信息，重新推荐5个礼物。`;
+      prompt += `\n请基于所有信息，重新推荐10个礼物。`;
 
       const result = await getPresentRecommend(prompt);
       // 跳转到结果页并传递新数据
