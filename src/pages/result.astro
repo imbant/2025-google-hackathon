@@ -1,8 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ResultPage from "../components/ResultPage";
+import SiteHeader from '../components/SiteHeader';
 ---
 
 <Layout>
-  <ResultPage client:load />
+	<SiteHeader client:only="react" />
+  <ResultPage client:only="react" />
 </Layout>

@@ -1,8 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import GiftDetailComponent from '../components/GiftDetail';
+import SiteHeader from '../components/SiteHeader.tsx';
 ---
 
 <Layout>
+  <SiteHeader client:only="react" />
   <GiftDetailComponent client:only="react" />
 </Layout>

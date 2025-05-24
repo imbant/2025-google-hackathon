@@ -1,8 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import MoreInfoForm from '../components/MoreInfoForm';
+import SiteHeader from '../components/SiteHeader';
 ---
 
 <Layout>
-  <MoreInfoForm client:load />
+  <SiteHeader client:only="react" />
+  <MoreInfoForm client:only="react" />
 </Layout>

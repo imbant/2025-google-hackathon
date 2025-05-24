@@ -1,8 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import MyForm from '../components/MyForm';
+import SiteHeader from '../components/SiteHeader';
 ---
 
 <Layout>
+	<SiteHeader client:only="react" />
   <MyForm client:only="react" />
 </Layout>
