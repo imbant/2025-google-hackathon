@@ -10,13 +10,8 @@ const ResultPage: React.FC = () => {
     setResults(state?.results || []);
   }, []);
 
-  // 10个推荐，分三列错落分布
-  const columns = [[], [], []] as PresentRecommend[][];
-  results.slice(0, 10).forEach((item, idx) => {
-    // 0:中 1:左 2:右 3:中 4:左 5:右 ...
-    const colIdx = idx % 3 === 0 ? 1 : idx % 3 === 1 ? 0 : 2;
-    columns[colIdx].push(item);
-  });
+  // 取前10个推荐结果
+  const displayResults = results.slice(0, 10);
 
   const handleCardClick = (item: PresentRecommend) => {
     // 这里假设 presentSuggestion 和 presentSummary 字段可能存在
@@ -46,49 +41,43 @@ const ResultPage: React.FC = () => {
           <Button type="default" onClick={() => window.location.href = "/moreinfo"}>补充信息</Button>
         </div>
         <h2>AI 礼物推荐结果</h2>
-        <div style={{ display: 'flex', gap: 24, alignItems: 'flex-start' }}>
-          {/* 中间列最高，左右列次之 */}
-          {[1,0,2].map((colIdx, visualIdx) => (
-            <div
-              key={colIdx}
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
+          gap: 24,
+          alignItems: 'start'
+        }}>
+          {displayResults.map((item, idx) => (
+            <Card
+              key={item.presentName + idx}
+              title={
+                <span style={{ fontWeight: idx === 0 ? 700 : 500 }}>
+                  {idx === 0 && '1️⃣ '}{idx === 1 && '2️⃣ '}{idx === 2 && '3️⃣ '}{item.presentName}
+                </span>
+              }
               style={{
-                flex: 1,
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 24,
-                marginTop:
-                  visualIdx === 0 ? 0 : 40 // 中间列0，左右列40
+                boxShadow: '0 4px 16px rgba(202,85,93,0.10)',
+                cursor: 'pointer',
+                borderRadius: 18,
+                background: macaronColors[idx % macaronColors.length],
+                border: 'none',
+                minHeight: 180,
+                position: 'relative',
+                overflow: 'hidden',
+                transition: 'box-shadow 0.2s',
               }}
+              bodyStyle={{ padding: 20, paddingTop: 32 }}
+              onClick={() => handleCardClick(item)}
+              hoverable
             >
-              {columns[colIdx].map((item, idx) => (
-                <Card
-                  key={item.presentName + idx}
-                  title={<span style={{ fontWeight: idx === 0 ? 700 : 500 }}>{item.presentName}</span>}
-                  style={{
-                    boxShadow: '0 4px 16px rgba(202,85,93,0.10)',
-                    cursor: 'pointer',
-                    borderRadius: 18,
-                    background: macaronColors[(colIdx * 3 + idx) % macaronColors.length],
-                    border: 'none',
-                    minHeight: 180,
-                    position: 'relative',
-                    overflow: 'hidden',
-                    transition: 'box-shadow 0.2s',
-                  }}
-                  bodyStyle={{ padding: 20, paddingTop: 32 }}
-                  onClick={() => handleCardClick(item)}
-                  hoverable
-                >
-                  <div style={{ color: '#CA555D', fontSize: 16, fontWeight: 500, zIndex: 1, position: 'relative', marginBottom: 8 }}>{item.presentReason}</div>
-                  <div style={{ color: '#888', fontSize: 14, marginBottom: 4 }}>
-                    <b>标签：</b>{item.tags && item.tags.length > 0 ? item.tags.join(' / ') : '无'}
-                  </div>
-                  <div style={{ color: '#888', fontSize: 14 }}>
-                    <b>价格区间：</b>{typeof item.minPrice === 'number' && typeof item.maxPrice === 'number' ? `${item.minPrice}元 - ${item.maxPrice}元` : '未知'}
-                  </div>
-                </Card>
-              ))}
-            </div>
+              <div style={{ color: '#CA555D', fontSize: 16, fontWeight: 500, zIndex: 1, position: 'relative', marginBottom: 8 }}>{item.presentReason}</div>
+              <div style={{ color: '#888', fontSize: 14, marginBottom: 4 }}>
+                <b>标签：</b>{item.tags && item.tags.length > 0 ? item.tags.join(' / ') : '无'}
+              </div>
+              <div style={{ color: '#888', fontSize: 14 }}>
+                <b>价格区间：</b>{typeof item.minPrice === 'number' && typeof item.maxPrice === 'number' ? `${item.minPrice}元 - ${item.maxPrice}元` : '未知'}
+              </div>
+            </Card>
           ))}
         </div>
         <Button type="primary" style={{ marginTop: 32 }} onClick={() => window.location.href = "/"}>返回首页</Button>

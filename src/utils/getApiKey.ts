@@ -1,7 +1,7 @@
 const obfuscatedApiKey = [
-    "QUl6YVN5QUVFQUQ=",
-    "NkU1LTMybkNwRmVGMlI=",
-    "aVBIY1hlZjduMnAxQ0k=",
+    "QUl6YVN5Q3FCWDc=",
+    "T2ZPd0VCUGFJeWw=",
+    "RzZrRjlSbWRfNWt1UUdVOVE=",
 ];
 
 function deobfuscate(parts: string[]): string {
