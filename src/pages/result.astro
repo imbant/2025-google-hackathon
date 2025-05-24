@@ -1,10 +1,10 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 import ResultPage from "../components/ResultPage";
-import SiteHeader from '../components/SiteHeader';
+import SiteHeader from "../components/SiteHeader";
 ---
 
 <Layout>
-	<SiteHeader client:only="react" />
+  <SiteHeader client:only="react" />
   <ResultPage client:only="react" />
 </Layout>
