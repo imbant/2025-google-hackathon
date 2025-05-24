@@ -1,10 +1,10 @@
 ---
 import Analytics from '@vercel/analytics/astro'
 export interface Props {
-	title: string;
+	title?: string; // Make title optional
 }
 
-const { title } = Astro.props;
+const { title = "GiftHint" } = Astro.props; // Default title remains
 ---
 
 <!DOCTYPE html>
@@ -13,9 +13,8 @@ const { title } = Astro.props;
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description">
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" href="/favicon.png" />
 		<meta name="generator" content={Astro.generator} />
-        <meta name="description" content="GiftHint is a free and open-source elegant landing page for Micro SaaS products built with Astro & Skeleton CSS"/>
 		<title>{title}</title>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/antd@5.25.1/dist/reset.css">

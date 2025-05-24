@@ -13,7 +13,8 @@ const GiftDetail: React.FC = () => {
 
   useEffect(() => {
     // 从 window.history.state 读取礼物详情和 summary
-    const state = window.history.state && window.history.state.usr;
+    const state =
+     window.history.state && window.history.state.usr;
     if (state && state.gift) {
       setGift(state.gift);
       setSummary(state.summary || "");
