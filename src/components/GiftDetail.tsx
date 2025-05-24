@@ -42,6 +42,7 @@ const GiftDetail: React.FC = () => {
 - 整体风格要现代且有质感
 - 对实物产品，请展示其最佳角度和细节
 - 添加一些装饰元素（如包装盒、丝带等）来增强礼物的感觉
+- 避免携带任何文字
 
 特别说明：推荐这个礼物的理由是 ${giftData.presentReason}
 对这个礼物的总结是: ${giftData.presentSummary}
