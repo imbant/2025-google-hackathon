@@ -16,7 +16,6 @@ export interface PresentRecommend {
 }
 
 const MyForm = () => {
-  const [checked, setChecked] = useState(false);
   const [loading, setLoading] = useState(false);
   const handleClick = async (
     answers: Record<number, string[]>,

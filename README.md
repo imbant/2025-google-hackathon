@@ -3,12 +3,12 @@
 
 
 ## About
-Astrobrew is a free and open-source elegant landing page for Micro SaaS products built with Astro & Skeleton CSS
+GiftHint is a free and open-source elegant landing page for Micro SaaS products built with Astro & Skeleton CSS
 
 ### Live demo
 (https://brew.indiebold.com/)
 
-### Upgrade to Astrobrew Pro version
+### Upgrade to GiftHint Pro version
 (https://brewpro.indiebold.com/)
 
 

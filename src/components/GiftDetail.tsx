@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Card, Button, Layout, Spin, Image } from "antd";
 import { GoogleGenAI, Modality } from "@google/genai";
 import type { PresentRecommend } from "./MyForm";
+import BrowseMore from "./BrowseMore";
 
 const GiftDetail: React.FC = () => {
   const [gift, setGift] = useState<PresentRecommend | null>(null);
@@ -140,6 +141,9 @@ const GiftDetail: React.FC = () => {
         </div>
         <Button type="primary" onClick={goBack}>返回全部结果</Button>
       </Card>
+
+      {/* 随便逛逛组件 */}
+      <BrowseMore />
     </Layout>
   );
 };

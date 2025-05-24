@@ -1,64 +1,69 @@
 ---
-import Showcase from '../assets/image.png'
+import Showcase from "../assets/image.png";
 ---
 
-
 <section class="product-hero">
-    <div class="container">
-       <div class="row">
-           <div class="one-half column">
-              <div class="d-cell">
-               <h1 class="h1-title">Learn faster with your best language tutor</h1>
-               <div class="content">
-                   <p>Astrobrew is a free and open-source elegant landing page for Micro SaaS products built with Astro & Skeleton CSS</p>
-                   <a href="/table" class="button button-primary lg">Get started for free</a>
-               </div>
-              </div>
-           </div>
-           <div class="one-half column hero-media">
-               <img src={Showcase.src} class="u-full-width" alt="Hero illustrator">
-           </div>
-       </div>
+  <div class="container">
+    <div class="row">
+      <div class="one-half column">
+        <div class="d-cell">
+          <h1>
+            <span class="en-slogan">AI for Gifting, Love for Life</span>
+            <br />
+            <span class="zh-slogan">有AI，更有爱</span>
+          </h1>
+          <div class="content">
+            <p>
+              GiftHint是一款基于大模型技术的智能礼物推荐工具。通过简单几个问题即可勾勒出收礼人画像，快速为您推荐合适的礼物清单，让每一份心意，都轻松抵达。
+            </p>
+            <a href="/table" class="button button-primary lg"
+              >开始使用</a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="one-half column hero-media">
+        <img src={Showcase.src} class="u-full-width" alt="Hero illustrator" />
+      </div>
     </div>
-   </section>
+  </div>
+</section>
 
-   <style lang="scss">
+<style lang="scss">
+  .product-hero {
+    padding: 70px 0;
+    .row {
+      display: flex;
+      align-items: center;
+    }
+    .one-half {
+      display: table;
+      height: 400px;
+      margin-bottom: 40px;
+      .d-cell {
+        display: table-cell;
+        vertical-align: middle;
+      }
+    }
+    .hero-media {
+      position: relative;
+      img:not(.u-full-width) {
+        width: 80px;
+        position: absolute;
+        left: 20px;
+        bottom: 0;
+      }
+    }
+  }
 
-    .product-hero{
-        padding: 70px 0;
-        .row{
-            display: flex;
-            align-items: center;
-        }
-        .one-half{
-            display: table;
-            height: 400px;
-            margin-bottom: 40px;
-            .d-cell{
-                display: table-cell;
-                vertical-align: middle;
-            }
-        }
-    .hero-media{
-        position: relative;
-        img:not(.u-full-width){
-            width: 80px;
-            position: absolute;
-            left: 20px;
-            bottom: 0;
+  @media (max-width: 700px) {
+    .product-hero {
+      .row {
+        flex-direction: column;
+        .hero-media {
+          display: none;
         }
       }
     }
-
-
-    @media (max-width: 700px) {
-        .product-hero{
-            .row{
-                flex-direction: column;
-                .hero-media{
-                    display: none;
-                }
-            }
-        }
-    }
-   </style>
+  }
+</style>

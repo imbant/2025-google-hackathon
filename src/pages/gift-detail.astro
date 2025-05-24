@@ -1,8 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import GiftDetail from '../components/GiftDetail';
+import GiftDetailComponent from '../components/GiftDetail';
 ---
 
 <Layout title="礼物详情">
-  <GiftDetail client:load />
+  <GiftDetailComponent client:only="react" />
 </Layout>
