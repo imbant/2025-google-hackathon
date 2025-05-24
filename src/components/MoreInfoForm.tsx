@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Card, Input, Button, Layout, message } from "antd";
 import { GoogleGenAI, Type } from "@google/genai";
 import type { PresentRecommend } from "./MyForm";
+import { getApiKey } from "../utils/getApiKey";
 
 const { TextArea } = Input;
 
@@ -10,7 +11,7 @@ async function getPresentRecommend(
   prompt: string
 ): Promise<PresentRecommend[]> {
   const ai = new GoogleGenAI({
-    apiKey: "AIzaSyAEEAD6E5-32nCpFeF2RiPHcXef7n2p1CI",
+    apiKey: getApiKey(),
   });
   const response = await ai.models.generateContent({
     model: "gemini-2.0-flash",

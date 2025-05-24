@@ -3,6 +3,7 @@ import { Card, Button, Layout, Spin, Image } from "antd";
 import { GoogleGenAI, Modality } from "@google/genai";
 import type { PresentRecommend } from "./MyForm";
 import BrowseMore from "./BrowseMore";
+import { getApiKey } from "../utils/getApiKey";
 
 const GiftDetail: React.FC = () => {
   const [gift, setGift] = useState<PresentRecommend | null>(null);
@@ -25,7 +26,7 @@ const GiftDetail: React.FC = () => {
     setImageLoading(true);
     try {
       const ai = new GoogleGenAI({
-        apiKey: "AIzaSyAEEAD6E5-32nCpFeF2RiPHcXef7n2p1CI",
+        apiKey: getApiKey(),
       });
 
       // 构造专业的图片生成 prompt

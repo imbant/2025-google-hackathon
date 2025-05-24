@@ -3,6 +3,7 @@ import { Checkbox, Button, Layout, Spin } from "antd";
 import { GoogleGenAI, Type } from "@google/genai";
 import QuizForm from "./QuizForm";
 import { questions } from "./constants";
+import { getApiKey } from "../utils/getApiKey";
 
 // 礼物推荐结果类型
 export interface PresentRecommend {
@@ -32,7 +33,7 @@ const MyForm = () => {
       });
       // 调用大模型
       const ai = new GoogleGenAI({
-        apiKey: "AIzaSyAEEAD6E5-32nCpFeF2RiPHcXef7n2p1CI",
+        apiKey: getApiKey(),
       });
       const response = await ai.models.generateContent({
         // model: "gemini-2.0-flash",
